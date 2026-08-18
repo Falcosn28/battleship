@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "live": "webpack serve",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
   "homepage": "https://github.com/Falcosn28/battleship#readme",
   "description": "",
   "devDependencies": {
+    "@babel/preset-env": "^7.29.7",
     "css-loader": "^7.1.4",
+    "eslint-plugin-jest": "^29.16.1",
     "html-webpack-plugin": "^5.6.8",
     "style-loader": "^4.0.0",
     "webpack": "^5.109.2",
