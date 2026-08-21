@@ -19,18 +19,5 @@ class ships {
 
 }
 
-const ship = new ships(4)
-
-console.log(ship)
-
-ship.hit()
-ship.hit()
-
-ship.hit()
-ship.hit()
-ship.isSunk()
-
-console.log(ship)
-
 
 export {ships}
