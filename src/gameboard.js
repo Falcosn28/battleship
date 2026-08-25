@@ -1,5 +1,5 @@
 
-import { ships } from "./ship";
+// import { ships } from "./ship.js";
 
 function GameBoard () {
 
@@ -20,10 +20,15 @@ function GameBoard () {
 
   }
 
-  function placeShip () {
+  function placeShip (location, ship) {
 
-    let ship = new ships(5) 
+    const [y, x] = location
+
+    for (let i = 0; i >= ship.length; i++) {
+      board[y][x + i] = 1
+    }
     
+
 
   }
 
@@ -31,8 +36,7 @@ function GameBoard () {
 
   }
 
- return {createBoard}
+ return {createBoard, placeShip}
 }
-
 
 export {GameBoard}
