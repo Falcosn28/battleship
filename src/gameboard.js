@@ -24,11 +24,9 @@ function GameBoard () {
 
     const [y, x] = location
 
-    for (let i = 0; i >= ship.length; i++) {
+    for (let i = 0; i < ship.length; i++) {
       board[y][x + i] = 1
     }
-    
-
 
   }
 
