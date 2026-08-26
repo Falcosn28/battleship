@@ -1,4 +1,8 @@
 
 import "./styles.css";
-import { ships } from "./ship";
+import { dom } from "./dom.js";
+
+const display = dom()
+
+display.domBoard();
 
