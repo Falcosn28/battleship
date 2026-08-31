@@ -16,8 +16,8 @@ body{
 
 .board{
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
   width: 500px;
   height: 500px;
 }
@@ -29,10 +29,8 @@ body{
 
 .numbers-on-board{
   display: grid;
-  grid-template-rows: repeat(10, 1fr);
-  height: 500px;
-  width: 50px;
-  
+  grid-row: 2 / -1;
+
   color: white;
   font-size: 18px;
 }
@@ -41,14 +39,14 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-color: black;
 }
 
 .letters-on-board{
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(11, 1fr);
-  height: 50px;
-  width: 550px;
   
   color: white;
   font-size: 18px;
@@ -58,6 +56,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+
   background-color: black;
 }
 
