@@ -1,5 +1,9 @@
 
 // import { ships } from "./ship.js";
+import { dom } from "./dom"
+//use dom to load ship
+//just place ships at place and disply
+//set location don't let the player choose for now
 
 function GameBoard () {
 
