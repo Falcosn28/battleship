@@ -1,10 +1,7 @@
 
 import "./styles.css";
 import { dom } from "./dom.js";
+import { player, computer } from "./player.js";
 
-const display = dom()
-
-display.domBoard();
-
-
+player.gameboard.placeShip([1, 2], 4)
 

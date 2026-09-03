@@ -47,15 +47,14 @@ function dom() {
     }
 
     divContent.append(divBoard)
-
-    placeShip([4, 5])
   }
 
-  function domShip (location) {
-    location.classList.add("ship")
+  function domShip (locationY, locationX) {
+    const tt = player.gameboard.getBoard()
+    tt[locationY][locationX].classList.add("ship");
   }
 
-  return {domBoard}
+  return {domBoard, domShip}
 }
 
 

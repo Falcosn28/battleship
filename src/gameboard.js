@@ -1,11 +1,10 @@
 
 // import { ships } from "./ship.js";
 import { dom } from "./dom"
-//use dom to load ship
-//just place ships at place and disply
-//set location don't let the player choose for now
 
 function GameBoard () {
+  const display = dom()
+  display.domBoard();
 
   let board = createBoard()
   let missed = 0
@@ -33,10 +32,13 @@ function GameBoard () {
 
     const [y, x] = location
 
-    for (let i = 0; i < ship.length; i++) {
-      board[y][x + i] = 1
+    for (let i = 0; i < ship; i++) {
+      board[y][x + i] = 1;
+      console.table(board)
     }
 
+
+    
   }
 
   function receiveAttack (location) {
