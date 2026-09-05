@@ -3,8 +3,6 @@
 import { dom } from "./dom"
 
 function GameBoard () {
-  const display = dom()
-  display.domBoard();
 
   let board = createBoard()
   let missed = 0
@@ -34,10 +32,7 @@ function GameBoard () {
 
     for (let i = 0; i < ship; i++) {
       board[y][x + i] = 1;
-      console.table(board)
     }
-
-
     
   }
 
@@ -73,3 +68,7 @@ function GameBoard () {
 }
 
 export {GameBoard}
+
+
+
+
