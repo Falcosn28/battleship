@@ -1,34 +1,34 @@
 
-
-function dom(gameboard) {
+function dom() {
 
   const divContent = document.querySelector(".content")
 
   const divBoard = document.createElement("div");
   divBoard.classList.add("board");
 
-  function domBoard() {
+  divContent.append(divBoard)
 
-    let board = gameboard.getBoard()
+  function domBoard(board) {
+    divBoard.innerHTML = "";
 
     divBoard.append(domBoardAlphabet())
     divBoard.append(domBoardNumbers())
 
     board.forEach((row) => {
-      row.forEach(() => {
+      row.forEach((cell) => {
         const box = document.createElement("div");
 
         box.classList.add("box");
 
-        box.addEventListener("click", () => {
-          box.classList.add("ship");
-        });
+        if (cell === 1) {
+          domShip(box)
+        }
 
         divBoard.append(box);
       });
     });
 
-    divContent.append(divBoard)
+
   }
 
   function domBoardNumbers(){
@@ -65,9 +65,8 @@ function dom(gameboard) {
 
   }
 
-  function domShip (locationY, locationX) {
-    // const tt = player.gameboard.getBoard()
-    // tt[locationY][locationX].classList.add("ship");
+  function domShip(cell) {
+    cell.classList.add("ship");
   }
 
   return {domBoard, domShip}

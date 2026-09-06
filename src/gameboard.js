@@ -2,7 +2,7 @@
 // import { ships } from "./ship.js";
 import { dom } from "./dom"
 
-function GameBoard () {
+function GameBoard (display) {
 
   let board = createBoard()
   let missed = 0
@@ -31,8 +31,10 @@ function GameBoard () {
     const [y, x] = location
 
     for (let i = 0; i < ship; i++) {
-      board[y][x + i] = 1;
+      board[y][x + i] = 1
     }
+
+    display.domBoard(board)
     
   }
 

@@ -5,9 +5,9 @@ import { dom } from "./dom"
 
 class Player {
   constructor(name) {
-    this.gameboard = GameBoard();
     this.name = name;
-    this.dom = dom(this.gameboard);
+    this.dom = dom();
+    this.gameboard = GameBoard(this.dom);
 
   }
 }
