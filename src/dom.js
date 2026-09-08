@@ -1,5 +1,5 @@
 
-function dom() {
+function dom(gameboard, name) {
 
   const divContent = document.querySelector(".content")
 
@@ -23,6 +23,15 @@ function dom() {
         if (cell === 1) {
           domShip(box)
         }
+
+        box.addEventListener("click", () => {
+          gameboard.onClick(name)
+          //check turn
+            //function that takes board and player
+            //return true if board dosn't match player
+            
+          //run function attact
+        });
 
         divBoard.append(box);
       });

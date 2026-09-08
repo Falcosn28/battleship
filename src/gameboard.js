@@ -2,10 +2,11 @@
 // import { ships } from "./ship.js";
 import { dom } from "./dom"
 
-function GameBoard (display) {
+function GameBoard () {
 
   let board = createBoard()
   let missed = 0
+  let playerTurn = true
 
   function createBoard () {
 
@@ -33,12 +34,10 @@ function GameBoard (display) {
     for (let i = 0; i < ship; i++) {
       board[y][x + i] = 1
     }
-
-    display.domBoard(board)
     
   }
 
-  function receiveAttack (location) {
+  function receiveAttack (location) { //recod missed attacks
 
     const [y, x] = location
 
@@ -66,7 +65,21 @@ function GameBoard (display) {
     return true
   }
 
- return {createBoard, placeShip, receiveAttack, displayMiss, getBoard, shipsSunk}
+  function onClick(board, activePlayer){
+    if (playerTurn) {
+      //playeTurn false
+      //run attack
+    }
+    else if (playerTurn) {
+      
+    }
+  }
+
+  function turn(){
+
+  }
+
+ return {createBoard, placeShip, receiveAttack, displayMiss, getBoard, shipsSunk, onClick}
 }
 
 export {GameBoard}

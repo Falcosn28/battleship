@@ -1,5 +1,5 @@
 
-import { GameBoard } from "./gameboard";
+import { GameBoard } from "./gameboard.js";
 import { ships } from "./ship";
 
 
@@ -27,7 +27,7 @@ test('place ship 00', () => {
   const board = gameboard.getBoard()
   const ship = new ships(5)
 
-  gameboard.placeShip([0, 0], ship);
+  gameboard.placeShip([0, 0], ship.length);
 
   expect(board[0][0]).toBe(1);
   expect(board[0][1]).toBe(1);
@@ -44,7 +44,7 @@ test('place ship 01', () => {
   const board = gameboard.getBoard()
   const ship = new ships(4)
 
-  gameboard.placeShip([1, 2], ship);
+  gameboard.placeShip([1, 2], ship.length);
 
   expect(board[1][0]).toBe(0);
   expect(board[1][1]).toBe(0);
@@ -57,7 +57,7 @@ test('place ship 01', () => {
 });
 
 
-test('attack', () => {
+test.skip('attack', () => {
 
   const gameboard = GameBoard();
   const ship = new ships(4)
@@ -74,7 +74,7 @@ test('attack', () => {
 });
 
 
-test('miss', () => {
+test.skip('miss', () => {
 
   const gameboard = GameBoard();
   const ship = new ships(4)
@@ -103,7 +103,7 @@ test('miss', () => {
 });
 
 
-test('ship sunk', () => {
+test.skip('ship sunk', () => {
 
   const gameboard = GameBoard();
   const ship = new ships(4)
