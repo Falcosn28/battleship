@@ -15,6 +15,7 @@ class ships {
     if (this.length === this.hits) {
       this.sunk = true
     }
+
   }
 
 }

@@ -2,6 +2,17 @@
 import { GameBoard } from "./gameboard.js";
 import { ships } from "./ship";
 
+test('ship class', () => {
+  const gameboard = GameBoard();
+  const ship = gameboard.placeShip([1, 2], 2);
+  
+  ship.hit()
+  ship.isSunk()
+  expect(ship.sunk).toEqual(false);
+  ship.hit()
+  ship.isSunk()
+  expect(ship.sunk).toEqual(true);
+});
 
 test('create board row works', () => {
   const gameboard = GameBoard();
@@ -25,61 +36,58 @@ test('create board columes works', () => {
 test('place ship 00', () => {
   const gameboard = GameBoard();
   const board = gameboard.getBoard()
-  const ship = new ships(5)
+  const ship = gameboard.placeShip([0, 0], 5);
 
-  gameboard.placeShip([0, 0], ship.length);
-
-  expect(board[0][0]).toBe(1);
-  expect(board[0][1]).toBe(1);
-  expect(board[0][2]).toBe(1);
-  expect(board[0][3]).toBe(1);
-  expect(board[0][4]).toBe(1);
-  expect(board[0][5]).toBe(0);
-  expect(board[0][6]).toBe(0);
+  expect(board[0][0]).toEqual(ship);
+  expect(board[0][1]).toEqual(ship);
+  expect(board[0][2]).toEqual(ship);
+  expect(board[0][3]).toEqual(ship);
+  expect(board[0][4]).toEqual(ship);
+  expect(board[0][5]).toEqual(0);
+  expect(board[0][6]).toEqual(0);
 
 });
 
 test('place ship 01', () => {
   const gameboard = GameBoard();
   const board = gameboard.getBoard()
-  const ship = new ships(4)
+  const ship = gameboard.placeShip([1, 2], 4);
 
-  gameboard.placeShip([1, 2], ship.length);
-
-  expect(board[1][0]).toBe(0);
-  expect(board[1][1]).toBe(0);
-  expect(board[1][2]).toBe(1);
-  expect(board[1][3]).toBe(1);
-  expect(board[1][4]).toBe(1);
-  expect(board[1][5]).toBe(1);
-  expect(board[1][6]).toBe(0);
+  expect(board[1][0]).toEqual(0);
+  expect(board[1][1]).toEqual(0);
+  expect(board[1][2]).toEqual(ship);
+  expect(board[1][3]).toEqual(ship);
+  expect(board[1][4]).toEqual(ship);
+  expect(board[1][5]).toEqual(ship);
+  expect(board[1][6]).toEqual(0);
 
 });
 
 
-test.skip('attack', () => {
+test('attack', () => {
 
   const gameboard = GameBoard();
-  const ship = new ships(4)
+  const ship = gameboard.placeShip([1, 2], 4);
 
-  gameboard.placeShip([1, 2], ship);
+  gameboard.receiveAttack([1,2]);
 
-  expect(gameboard.receiveAttack([1,2])).toBe("hit");
-  expect(gameboard.receiveAttack([1,0])).toEqual([1,0]);
-  expect(gameboard.receiveAttack([2,0])).toEqual([2,0]);
-  expect(gameboard.receiveAttack([1,6])).toEqual([1,6]);
-  expect(gameboard.receiveAttack([1,4])).toEqual("hit");
-  expect(gameboard.receiveAttack([1,5])).toEqual("hit");
+  expect(ship.hits).toEqual(1)
+
+  // expect(gameboard.receiveAttack([1,0])).toEqual([1,0]);
+  // expect(gameboard.receiveAttack([2,0])).toEqual([2,0]);
+  // expect(gameboard.receiveAttack([1,6])).toEqual([1,6]);
+  // expect(gameboard.receiveAttack([1,4])).toEqual("hit");
+  // expect(gameboard.receiveAttack([1,5])).toEqual("hit");
 
 });
 
 
-test.skip('miss', () => {
+test('miss', () => {
 
   const gameboard = GameBoard();
-  const ship = new ships(4)
+  const ship = gameboard.placeShip([1, 2], 4);
 
-  gameboard.placeShip([1, 2], ship);
+  expect(gameboard.displayMiss()).toEqual([]);
 
   gameboard.receiveAttack([1,2])
   gameboard.receiveAttack([1,0]) //miss
@@ -88,29 +96,29 @@ test.skip('miss', () => {
   gameboard.receiveAttack([1,4])
   gameboard.receiveAttack([1,5])
 
-  expect(gameboard.displayMiss()).toEqual(3);
+  expect(gameboard.displayMiss()).toEqual([[1,0],[2,0],[1,6]]);
    
   gameboard.receiveAttack([1,6]) //miss
   gameboard.receiveAttack([1,6]) //miss
 
-  expect(gameboard.displayMiss()).toEqual(5);
+  expect(gameboard.displayMiss()).toEqual([[1,0],[2,0],[1,6],[1,6],[1,6]]);
 
   gameboard.receiveAttack([1,4])
   gameboard.receiveAttack([1,5])
 
-  expect(gameboard.displayMiss()).toEqual(5);
+  expect(gameboard.displayMiss()).toEqual([[1,0],[2,0],[1,6],[1,6],[1,6]]);
 
 });
 
 
-test.skip('ship sunk', () => {
+test('board ship free', () => {
 
   const gameboard = GameBoard();
   const ship = new ships(4)
 
   expect(gameboard.shipsSunk()).toEqual(true);
 
-  gameboard.placeShip([1, 2], ship);
+  gameboard.placeShip([1, 2], ship.length);
 
   expect(gameboard.shipsSunk()).toEqual(false);
 

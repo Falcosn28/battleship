@@ -2,10 +2,12 @@
 // import { ships } from "./ship.js";
 import { dom } from "./dom"
 
+import { ships } from "./ship"
+
 function GameBoard () {
 
   let board = createBoard()
-  let missed = 0
+  let missed = []
   let playerTurn = true
 
   function createBoard () {
@@ -27,37 +29,42 @@ function GameBoard () {
     return board
   }
 
-  function placeShip (location, ship) {
+  function placeShip (location, shipLength) {
+
+    const ship = new ships(shipLength)
 
     const [y, x] = location
 
-    for (let i = 0; i < ship; i++) {
-      board[y][x + i] = 1
+    for (let i = 0; i < ship.length; i++) {
+      board[y][x + i] = ship
     }
     
+    return ship
+
   }
 
   function receiveAttack (location) { //recod missed attacks
 
     const [y, x] = location
 
-    if (board[y][x] === 1){
-      return "hit"
+    if (board[y][x] !== 0){
+      board[y][x].hit()
+      return
     }
-    missed++
 
+    missed.push([y, x])
     return [y, x]
 
   }
 
-  function displayMiss () {
+  function displayMiss() {
     return missed
   }
 
   function shipsSunk () {
     for (let row = 0; row < board.length; row++) {
       for (let col = 0; col < board[row].length; col++) {
-        if (board[row][col] == 1) {
+        if (board[row][col] !== 0) {
           return false
         };
       }
@@ -65,21 +72,9 @@ function GameBoard () {
     return true
   }
 
-  function onClick(board, activePlayer){
-    if (playerTurn) {
-      //playeTurn false
-      //run attack
-    }
-    else if (playerTurn) {
-      
-    }
-  }
 
-  function turn(){
 
-  }
-
- return {createBoard, placeShip, receiveAttack, displayMiss, getBoard, shipsSunk, onClick}
+ return {createBoard, placeShip, receiveAttack, getBoard, shipsSunk, displayMiss}
 }
 
 export {GameBoard}
