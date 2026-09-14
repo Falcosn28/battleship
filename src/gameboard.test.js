@@ -63,7 +63,6 @@ test('place ship 01', () => {
 
 });
 
-
 test('attack', () => {
 
   const gameboard = GameBoard();
@@ -73,14 +72,12 @@ test('attack', () => {
 
   expect(ship.hits).toEqual(1)
 
-  // expect(gameboard.receiveAttack([1,0])).toEqual([1,0]);
-  // expect(gameboard.receiveAttack([2,0])).toEqual([2,0]);
-  // expect(gameboard.receiveAttack([1,6])).toEqual([1,6]);
-  // expect(gameboard.receiveAttack([1,4])).toEqual("hit");
-  // expect(gameboard.receiveAttack([1,5])).toEqual("hit");
+  gameboard.receiveAttack([1,3]);
+  gameboard.receiveAttack([2,0]);
+  gameboard.receiveAttack([1,4]);
+  expect(ship.hits).toEqual(3);
 
 });
-
 
 test('miss', () => {
 
@@ -109,7 +106,6 @@ test('miss', () => {
   expect(gameboard.displayMiss()).toEqual([[1,0],[2,0],[1,6],[1,6],[1,6]]);
 
 });
-
 
 test('board ship free', () => {
 

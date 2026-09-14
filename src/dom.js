@@ -1,42 +1,38 @@
 
-function dom(gameboard, name) {
+import { game } from "./game";
+
+function dom(obj) {
 
   const divContent = document.querySelector(".content")
 
-  const divBoard = document.createElement("div");
-  divBoard.classList.add("board");
-
-  divContent.append(divBoard)
-
   function domBoard(board) {
-    divBoard.innerHTML = "";
+    const divBoard = document.createElement("div");
+    divBoard.classList.add("board");
+    divBoard.classList.add(obj.name);
+
+    divContent.append(divBoard)
 
     divBoard.append(domBoardAlphabet())
     divBoard.append(domBoardNumbers())
 
-    board.forEach((row) => {
-      row.forEach((cell) => {
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, index) => {
         const box = document.createElement("div");
 
         box.classList.add("box");
 
-        if (cell === 1) {
+        if (cell !== 0) {
           domShip(box)
         }
 
         box.addEventListener("click", () => {
-          gameboard.onClick(name)
-          //check turn
-            //function that takes board and player
-            //return true if board dosn't match player
-            
-          //run function attact
+          const location = [rowIndex, index]
+          game.onClick(location, obj)
         });
 
         divBoard.append(box);
       });
     });
-
 
   }
 
@@ -74,11 +70,29 @@ function dom(gameboard, name) {
 
   }
 
+
+  function domBoardUpdate(board){
+
+    const boardDOM = document.querySelectorAll(`.${obj.name} .box`);
+
+    board.forEach((row, rowIndex) => {
+     row.forEach((cell, columnIndex) => {
+
+      if (cell !== 0) {
+        const domIndex = rowIndex * 10 + columnIndex;
+        domShip(boardDOM[domIndex])
+      }
+
+     });
+    });
+
+  }
+
   function domShip(cell) {
     cell.classList.add("ship");
   }
 
-  return {domBoard, domShip}
+  return {domBoard, domShip, domBoardUpdate}
 }
 
 

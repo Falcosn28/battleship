@@ -1,14 +1,11 @@
 
 // import { ships } from "./ship.js";
-import { dom } from "./dom"
-
 import { ships } from "./ship"
 
 function GameBoard () {
 
   let board = createBoard()
   let missed = []
-  let playerTurn = true
 
   function createBoard () {
 
@@ -71,7 +68,6 @@ function GameBoard () {
     }
     return true
   }
-
 
 
  return {createBoard, placeShip, receiveAttack, getBoard, shipsSunk, displayMiss}
