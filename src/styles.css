@@ -7,7 +7,13 @@ body{
   background-color: rgb(77, 124, 168);
   display: flex;
   flex-direction: column;
-  
+}
+
+.players-names{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 1000px;
 }
 
 .content{
@@ -15,15 +21,15 @@ body{
   justify-content: center;
   align-items: center;
   gap: 400px;
-  margin-top: 100px;
 }
 
 .board{
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   grid-template-rows: repeat(11, 1fr);
-  width: 500px;
+  min-width: 500px;
   height: 500px;
+  
 }
 
 .box{
@@ -66,4 +72,12 @@ body{
 
 .ship{
   background-color: black;
+}
+
+.attack{
+  background-color: red;
+}
+
+.miss{
+  background-color: rgba(92, 109, 156, 0.473);
 }

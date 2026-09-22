@@ -40,17 +40,28 @@ function GameBoard () {
 
   }
 
-  function receiveAttack (location) { //recod missed attacks
+  function receiveAttack (location) { //recod attacks
 
     const [y, x] = location
 
-    if (board[y][x] !== 0){
-      board[y][x].hit()
+    if (missed.some(value => value[0] === y && value[1] === x)){
       return
     }
 
     missed.push([y, x])
-    return [y, x]
+
+    if (board[y][x] !== 0){
+      board[y][x].hit()
+      board[y][x].isSunk()
+      if (board[y][x].sunk){
+
+      }
+      return true
+    }
+
+    board[y][x] = 3 //miss
+
+    return false
 
   }
 
@@ -58,10 +69,10 @@ function GameBoard () {
     return missed
   }
 
-  function shipsSunk () {
+  function shipsSunk () { //needs rework
     for (let row = 0; row < board.length; row++) {
       for (let col = 0; col < board[row].length; col++) {
-        if (board[row][col] !== 0) {
+        if (typeof board[row][col] === "object") {
           return false
         };
       }
