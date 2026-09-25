@@ -5,8 +5,7 @@ function dom(obj) {
 
   function domBoard(board) {
     const divBoard = document.createElement("div");
-    // const name = document.createElement("h1");
-    // name.innerText = obj.name;
+
     divBoard.classList.add("board");
     divBoard.classList.add(obj.name);
 
@@ -68,28 +67,31 @@ function dom(obj) {
     return alphabet;
   }
 
-  function domBoardUpdate(board, location) {
+  function domBoardUpdate(board) {
     const boardDOM = document.querySelectorAll(`.${obj.name} .box`);
 
-    const [y, x] = location
+    for (let y = 0; y < board.length; y++) {
+      for (let x = 0; x < board[y].length; x++) {
+        const domIndex = y * 10 + x;
+        const cell = board[y][x];
 
-    const domIndex = y * 10 + x;
-
-    const cell = board[y][x];
-    // console.log(cell)
-
-    if (cell === 1) {
-      //ship
-      boardDOM[domIndex].classList.add("ship");
-    } else if (cell === 3) {
-      //miss
-      boardDOM[domIndex].classList.add("miss");
-    } else if (typeof cell === "object") {
-      //attack on ship
-      boardDOM[domIndex].classList.remove("ship");
-      boardDOM[domIndex].classList.add("attack");
-    } 
-
+        if (typeof cell === "object" && cell.sunk === true) {
+          boardDOM[domIndex].classList.add("sunk");
+        } else if (cell === 1) {
+          boardDOM[domIndex].classList.add("ship");
+        } else if (cell === 2) {
+          boardDOM[domIndex].classList.add("miss");
+        } else if (
+          typeof cell === "object" &&
+          obj.gameboard
+            .getAttacked()
+            .some((value) => value[0] === y && value[1] === x)
+        ) {
+          boardDOM[domIndex].classList.remove("ship");
+          boardDOM[domIndex].classList.add("attack");
+        }
+      }
+    }
   }
 
   return { domBoard, domBoardUpdate };

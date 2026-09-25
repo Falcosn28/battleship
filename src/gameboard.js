@@ -6,6 +6,8 @@ function GameBoard () {
 
   let board = createBoard()
   let missed = []
+  let attacked = []
+  let onBoardShips = []
 
   function createBoard () {
 
@@ -26,9 +28,23 @@ function GameBoard () {
     return board
   }
 
+  function getShips() {
+    return onBoardShips
+  }
+
+  function getAttacked() {
+    return attacked 
+  }
+
+  function displayMiss() {
+    return missed
+  }
+
   function placeShip (location, shipLength) {
 
     const ship = new ships(shipLength)
+
+    onBoardShips.push(ship)
 
     const [y, x] = location
 
@@ -44,29 +60,26 @@ function GameBoard () {
 
     const [y, x] = location
 
-    if (missed.some(value => value[0] === y && value[1] === x)){
+    if (missed.some(value => value[0] === y && value[1] === x) &&
+        attacked.some(value => value[0] === y && value[1] === x)
+    ) {
       return
+    }
+
+
+    if (typeof board[y][x] === "object"){
+      attacked.push([y, x])
+      board[y][x].hit()
+      board[y][x].isSunk()
+      return true
     }
 
     missed.push([y, x])
 
-    if (board[y][x] !== 0){
-      board[y][x].hit()
-      board[y][x].isSunk()
-      if (board[y][x].sunk){
-
-      }
-      return true
-    }
-
-    board[y][x] = 3 //miss
+    board[y][x] = 2 //miss
 
     return false
 
-  }
-
-  function displayMiss() {
-    return missed
   }
 
   function shipsSunk () { //needs rework
@@ -74,6 +87,7 @@ function GameBoard () {
       for (let col = 0; col < board[row].length; col++) {
         if (typeof board[row][col] === "object") {
           return false
+          //check if every ship is sunk
         };
       }
     }
@@ -81,7 +95,7 @@ function GameBoard () {
   }
 
 
- return {createBoard, placeShip, receiveAttack, getBoard, shipsSunk, displayMiss}
+ return {createBoard, placeShip, receiveAttack, getBoard, shipsSunk, displayMiss, getShips, getAttacked}
 }
 
 export {GameBoard}
